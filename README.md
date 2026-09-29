@@ -8,7 +8,6 @@ API REST para gerenciamento de um salão de beleza.
 - TypeScript
 - Express
 - Supabase
-- PostgreSQL
 - Git
 
 ## Entidades
