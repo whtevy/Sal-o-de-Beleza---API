@@ -1,15 +1,11 @@
 import { Router } from 'express';
-import {
-  getProfessionals, getProfessionalById, createProfessional,
-  updateProfessional, deleteProfessional
-} from '../controllers/ProfessionalController';
-
+import { CrudController } from '../controllers/CrudController';
+import { CrudService } from '../services/CrudService';
 const router = Router();
-
-router.get('/', getProfessionals);
-router.get('/:id', getProfessionalById);
-router.post('/', createProfessional);
-router.put('/:id', updateProfessional);
-router.delete('/:id', deleteProfessional);
-
+const controller = new CrudController(new CrudService('professionals'));
+router.get('/', controller.list);
+router.get('/:id', controller.get);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.delete('/:id', controller.delete);
 export default router;

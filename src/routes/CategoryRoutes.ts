@@ -1,14 +1,11 @@
 import { Router } from 'express';
-import {
-  getCategories, getCategoryById, createCategory, updateCategory, deleteCategory
-} from '../controllers/CategoryController';
-
+import { CrudController } from '../controllers/CrudController';
+import { CrudService } from '../services/CrudService';
 const router = Router();
-
-router.get('/', getCategories);
-router.get('/:id', getCategoryById);
-router.post('/', createCategory);
-router.put('/:id', updateCategory);
-router.delete('/:id', deleteCategory);
-
+const controller = new CrudController(new CrudService('categories'));
+router.get('/', controller.list);
+router.get('/:id', controller.get);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.delete('/:id', controller.delete);
 export default router;

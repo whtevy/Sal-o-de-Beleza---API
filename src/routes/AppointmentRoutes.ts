@@ -1,15 +1,11 @@
 import { Router } from 'express';
-import {
-  getAppointments, getAppointmentById, createAppointment,
-  updateAppointment, deleteAppointment
-} from '../controllers/AppointmentController';
-
+import { CrudController } from '../controllers/CrudController';
+import { CrudService } from '../services/CrudService';
 const router = Router();
-
-router.get('/', getAppointments);
-router.get('/:id', getAppointmentById);
-router.post('/', createAppointment);
-router.put('/:id', updateAppointment);
-router.delete('/:id', deleteAppointment);
-
+const controller = new CrudController(new CrudService('appointments'));
+router.get('/', controller.list);
+router.get('/:id', controller.get);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.delete('/:id', controller.delete);
 export default router;

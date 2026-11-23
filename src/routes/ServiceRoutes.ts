@@ -1,14 +1,11 @@
 import { Router } from 'express';
-import {
-  getServices, getServiceById, createService, updateService, deleteService
-} from '../controllers/ServiceController';
-
+import { CrudController } from '../controllers/CrudController';
+import { CrudService } from '../services/CrudService';
 const router = Router();
-
-router.get('/', getServices);
-router.get('/:id', getServiceById);
-router.post('/', createService);
-router.put('/:id', updateService);
-router.delete('/:id', deleteService);
-
+const controller = new CrudController(new CrudService('services'));
+router.get('/', controller.list);
+router.get('/:id', controller.get);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.delete('/:id', controller.delete);
 export default router;
